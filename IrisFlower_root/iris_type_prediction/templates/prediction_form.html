@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Flower Type Prediction</title>
+</head>
+<body>
+    <h1>Iris Flower Type </h1>  
+
+    <form method="POST", action="{% url 'predict_type' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="sepal_length">Sepal Length (cm) </label>
+          <input type="text" class="form-control" id="sepal_length" name="sepal_length" aria-describedby="emailHelp">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="sepal_width">Sepal Width (cm)</label>
+            <input type="text" class="form-control" id="sepal_width" name="sepal_width" aria-describedby="emailHelp">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="petal_length">Petal Length (cm) </label>
+            <input type="text" class="form-control" id="petal_length" name="petal_length" aria-describedby="emailHelp">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="petal_width">Petal Width (cm) </label>
+            <input type="text" class="form-control" id="petal_width" name="petal_width" aria-describedby="emailHelp">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <h4>Data</h4>
+
+      {% comment %}Sepal Length {% endcomment %}
+      {% if sepal_length is None %}
+        <h4>Sepal Length: None</h4>
+      {% else %}
+        <h4>Sepal Length: {{sepal_length}}</h4>
+      {% endif %}
+
+
+
+      {% comment %}Sepal Width {% endcomment %}
+      {% if sepal_width is None %}
+        <h4>Sepal Width: None</h4>
+      {% else %}
+        <h4>Sepal Width: {{sepal_width}}</h4>
+      {% endif %}
+
+
+
+      {% comment %}Petal Length {% endcomment %}
+      {% if petal_length is None %}
+        <h4>Petal Length: None</h4>
+      {% else %}
+        <h4>Petal Length: {{petal_length}}</h4>
+      {% endif %}
+
+
+      {% comment %}Petal Width {% endcomment %}
+      {% if petal_width is None %}
+        <h4>Petal Width: None</h4>
+      {% else %}
+        <h4>Petal Width: {{petal_width}}</h4>
+      {% endif %}
+
+      <br>
+      {% comment %}Logistic Regression Prediction {% endcomment %}
+      <h4>Logistic Regression Prediction</h4>
+      {% if lgr_prediction is None %}
+        <h4>Prediction: Data not Passed</h4>
+      {% elif lgr_prediction == 0 %}
+        <h4>Iris Flower Type: Setosa</h4>
+      {% elif lgr_prediction == 1 %}
+        <h4>Iris Flower Type: Versicolor</h4>
+      {% else %}
+        <h4>Iris Flower Type: Virginica</h4>
+      {% endif %}
+
+
+      <br>
+      {% comment %}Support Vector Classifier Prediction {% endcomment %}
+      <h4>Support Vector Classifier Prediction</h4>
+      {% if svc_prediction is None %}
+        <h4>Prediction: Data not Passed</h4>
+      {% elif svc_prediction == 0 %}
+        <h4>Iris Flower Type: Setosa</h4>
+      {% elif svc_prediction == 1 %}
+        <h4>Iris Flower Type: Versicolor</h4>
+      {% else %}
+        <h4>Iris Flower Type: Virginica</h4>
+      {% endif %}
+
+</body>
+</html>
